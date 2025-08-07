@@ -1,14 +1,12 @@
-# Task3
-#  Vulnerability Scan Report – Windows Machine (Nessus Essentials)
+#  Vulnerability Scan Report – Nessus Essentials
 
 This project documents a basic vulnerability assessment performed on a Windows 11 system using **Tenable Nessus Essentials**. The objective was to identify potential security risks and explore mitigations using common hardening practices.
 
 
 ## 🛠️ Tools Used
-
 - **Nessus Essentials** (Free vulnerability scanner)
-     
 
+     
 ## ⚠️ Key Vulnerability Identified
 
 ### ✅ SMB Signing Not Required
@@ -31,6 +29,3 @@ This project documents a basic vulnerability assessment performed on a Windows 1
 - Scan summary
 - Vulnerability details
 - Fix recommendation view
-
-
-
