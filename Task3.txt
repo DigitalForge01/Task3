@@ -1,0 +1,83 @@
+Vulnerability Analysis: SMB Signing Not Required
+Vulnerability Details
+Field	Value
+Vulnerability	SMB Signing Not Required
+Plugin ID	57608
+Severity	Medium
+CVSS v3.0 Score	5.3
+Published Date	January 19, 2012
+Last Modified	October 5, 2022
+Family	Misc.
+Affected System	Your scanned Windows 11 machine (10.174.146.34)
+
+Description
+This vulnerability means that SMB message signing is not enforced on the remote SMB server.
+Without signing, the system is vulnerable to man-in-the-middle (MITM) attacks, where an attacker could intercept or manipulate SMB traffic.
+
+SMB (Server Message Block) is used for file sharing, printer access, etc., and is common in Windows environments. If signing isn’t enforced, attackers on the same network can impersonate or tamper with communication.
+
+
+
+
+
+ Risk / Impact
+Unauthenticated attackers can exploit this on unprotected networks.
+
+Exploits can lead to:
+Data theft
+Session hijacking
+NTLM credential capture
+
+If left unresolved, this could undermine file integrity and data trust across SMB sessions.
+
+ Fix / Mitigation (Microsoft Systems)
+ Enable SMB Signing (Client & Server)
+ Press Win + R, type gpedit.msc, hit Enter to open Local Group Policy Editor.
+
+On SMB Server (Windows):
+Go to:
+
+Edit
+Computer Configuration > Windows Settings > Security Settings > Local Policies > Security Options
+Enable:
+Microsoft network server: Digitally sign communications (always)
+Set to Enabled
+
+On SMB Client (if applicable):
+Enable:
+Microsoft network client: Digitally sign communications (always)
+Set to Enabled
+
+Reboot the system (or restart the SMB services) for changes to apply.
+
+ Alternate via Registry:
+You can also enforce it via the Registry or through GPO for domain-joined systems.
+
+References:
+Microsoft Technet: SMB Signing
+
+Samba Docs: SMB Signing
+
+
+
+
+Report 
+ 
+One medium-severity vulnerability was identified during the scan: SMB Signing Not Required (CVSS score: 5.3) on port 445/tcp. This issue occurs because the remote SMB server does not enforce message signing, which exposes the system to potential man-in-the-middle (MITM) attacks. An unauthenticated attacker on the same network could intercept or manipulate SMB traffic, compromising data integrity and security. Although this vulnerability does not have an associated CVE ID, it is well-documented. To mitigate the risk, it is recommended to enforce SMB signing using the local Group Policy Editor by enabling the policy: "Microsoft network server: Digitally sign communications (always)" under Security Option.s
+
+Summary & Recommendations
+Critical services should be patched or disabled immediately.
+
+Medium-risk items can be scheduled for next update cycle.
+
+Low/Informational findings can be reviewed as needed
+
+
+
+
+Top Critical & High Vulnerabilities
+The vulnerability scan revealed several high and medium severity issues that require attention. Firstly, the SMBv1 protocol is enabled on port 445/tcp, exposing the system to significant risk, including the well-known WannaCry ransomware, as referenced by CVE-2017-0144. This legacy protocol should be disabled via the Windows Features settings to eliminate the attack surface.
+
+Secondly, the system is affected by RDP Weak Encryption on port 3389/tcp, associated with CVE-2019-0708. This vulnerability allows an attacker to execute remote code through the Remote Desktop Protocol, making it critical to apply Microsoft’s security patches to secure RDP connections.
+
+Lastly, an outdated version of OpenSSH was detected on port 22/tcp, linked to CVE-2021-41617. This version contains a known buffer overflow vulnerability. It is recommended to update OpenSSH to the latest stable version to ensure the system is protected against this type of exploit.
